@@ -1,44 +1,38 @@
 package com.fuckingcheese.service.services;
 
 import com.fuckingcheese.service.models.Product;
+import com.fuckingcheese.service.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ProductService {
-    private List<Product> products = new ArrayList<>();
-    private long ID = 0;
+    private final ProductRepository productRepository;
 
+    public List<Product> listProducts(String title)
     {
-        products.add(new Product(++ID,"PlayStation 5","Loh","new",1000,"lohostan","clown"));
-        products.add(new Product(++ID,"PlayStation 3","Loh","bad",2900,"lohostan","clown"));
-        products.add(new Product(++ID,"PlayStation 4","Loh","new",5000,"lohostan","clown"));
-    }
-
-    public List<Product> listProducts()
-    {
-        return products;
+        if(title != null) return productRepository.findByTitle(title);
+        return productRepository.findAll();
     }
 
     public void saveProduct(Product product)
     {
-        product.setId(++ID);
-        products.add(product);
+        log.info("Saving new {}", product);
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id)
     {
-        products.removeIf(product -> product.getId().equals(id));
+        productRepository.deleteById(id);
     }
 
     public Product getProductById(Long id) {
-        for (Product product : products)
-        {
-            if (product.getId().equals(id))
-                return product;
-        }
-        return null;
+        return productRepository.findById(id).orElse(null);
     }
 }

@@ -6,10 +6,16 @@
 <body>
 <h1>Welcome to my service</h1><hr>
 <h4>Я лох как мне быть?</h4>
+<form action="/" method="get">
+    Поиск по названию: <input type="text" name="title"><br>
+    <input type="submit" value="Поиск"/>
+</form>
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price}$| <a href="/product/${product.id}">Подробнее...</a></p>
     </div>
+    <#else>
+    <h3>Товаров нет</h3>
 </#list>
 <hr>
 <h3>Создать новый товар</h3>
