@@ -4,11 +4,15 @@
     <title>KubasyaService</title>
 </head>
 <body>
-<h1>Welcome to my service</h1><hr>
+<h1>Welcome to my service | <a href="/login">Войти</a></h1><hr>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+</form>
 <h4>Я лох как мне быть?</h4>
 <form action="/" method="get">
     Поиск по названию: <input type="text" name="title"><br>
     <input type="submit" value="Поиск"/>
+    <input type="submit" value="Выйти"/>
 </form>
 <#list products as product>
     <div>
