@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Welcome to my service</h1><hr>
-<h4>ВАЖНАЯ ИНФА -- я ЛООООХ</h4>
+<h4>ВАЖНАЯ ИНФА</h4>
 <#list images as img>
     <img src="/images/${img.id}" height="60px"/><br><br>
 </#list>
@@ -14,10 +14,10 @@
 <b>Состояние товара: </b>${product.condition}<br>
 <b>Цена: </b>${product.price}<br>
 <b>Город: </b>${product.city}<br>
-<b>Автор: </b>${product.author}<br>
+<b>Автор: </b><a href="/user/${product.user.id}">${product.user.email}</a><br>
 <hr>
-<form action="/product/delete/${product.id}" method="post">
-    <input type="submit" value="Удолить товар"/>
-</form>
+<#--<form action="/product/delete/${product.id}" method="post">-->
+<#--    <input type="submit" value="Удолить товар"/>-->
+<#--</form>-->
 </body>
 </html>
